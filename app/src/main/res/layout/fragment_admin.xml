@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+<variable
+    name="viewmodel"
+    type="com.example.grocery.admin.AdminViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_16"
+        android:padding="@dimen/margin_16">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdmin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/category_name"
+            android:onClick="@{()->viewmodel.onCategoryButtonClicked()}"
+            android:paddingHorizontal="@dimen/margin_32"
+            android:layout_marginHorizontal="@dimen/margin_32"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/category_list"
+            android:layout_marginHorizontal="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_16"
+            android:onClick="@{()->viewmodel.onCategoryListButtonClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAdmin"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

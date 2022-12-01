@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/addCategory"
+        android:name="com.example.grocery.category.AddCategoryFragment"
+        android:label="AddCategory"
+        tools:layout="@layout/fragment_add_category">
+<!--        <argument-->
+<!--            android:name="category details"-->
+<!--            android:defaultValue="@null"-->
+<!--            app:argType="com.example.grocery.room.UserEntity"-->
+<!--            app:nullable="true" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/createCategoryList"
+        android:name="com.example.grocery.category_sub_items.AddCategoryList"
+        android:label="CreateCategoryList"
+        tools:layout="@layout/fragment_add_category_list" />
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.grocery.user.UserFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.grocery.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment2"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminFragment"
+            app:destination="@id/adminFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.grocery.admin.AdminFragment"
+        android:label="AdminFragment"
+        tools:layout="@layout/fragment_admin">
+        <action
+            android:id="@+id/action_adminFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_adminFragment_to_categorySubItemsFragment"
+            app:destination="@id/categorySubItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.grocery.category.CategoryFragment"
+        android:label="CategoryFragment"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_addCategory"
+            app:destination="@id/addCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/categorySubItemsFragment"
+        android:name="com.example.grocery.category_sub_items.CategorySubItemsFragment"
+        android:label="CategorySubItemsFragment"
+        tools:layout="@layout/fragment_category_sub_items">
+        <action
+            android:id="@+id/action_categorySubItemsFragment_to_createCategoryList"
+            app:destination="@id/createCategoryList" />
+    </fragment>
+</navigation>
