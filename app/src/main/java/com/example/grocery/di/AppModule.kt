@@ -2,22 +2,23 @@ package com.example.grocery.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.grocery.category.CategoryAdapter
+import com.example.grocery.room.UserDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class AppModule {
 
-    @Singleton
     @Provides
-    fun provideDataBase(@ApplicationContext context: Context): RoomDatabase {
-        return Room.databaseBuilder(context, RoomDatabase::class.java, "category").build()
+    @Singleton
+    fun provideDataBase(@ApplicationContext context: Context): UserDataBase {
+        return Room.databaseBuilder(context, UserDataBase::class.java, "category")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 }

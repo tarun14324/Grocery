@@ -9,9 +9,11 @@ import com.example.grocery.R
 import com.example.grocery.base.BaseFragment
 import com.example.grocery.databinding.FragmentCategoryBinding
 import com.example.grocery.room.UserEntity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 
+@AndroidEntryPoint
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
 
     override fun getLayout(): Int = R.layout.fragment_category
@@ -21,21 +23,13 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     var adapter = CategoryAdapter {
         onEditButtonClicked(it)
     }
-
     private val viewModel: CategoryViewModel by viewModels()
 
     override fun setUp() {
         binding.viewModel = viewModel
-        initializeData()
         binding.rvcategory.adapter = adapter
         adapter.submitList(list)
     }
-
-    private fun initializeData() {
-        for (i in 1..10)
-            list.add(UserEntity(0, "name-$i", R.drawable.apple.toString()))
-    }
-
 
     override fun getData(viewLifecycleOwner: LifecycleOwner) {
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
@@ -43,7 +37,13 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
                 findNavController().navigate(CategoryFragmentDirections.actionCategoryFragmentToAddCategory())
             }
         }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.categoryList.collectLatest {
+                adapter.submitList(it)
+            }
+        }
     }
+
 
     private fun onEditButtonClicked(item: UserEntity) {
         findNavController().navigate(

@@ -16,9 +16,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCategory"
+            isVisible="@{viewModel.showImage,default=false}"
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:layout_marginTop="4dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +29,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnUpload"
+            isVisible="@{!viewModel.showImage,default=true}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_32"
             android:drawableEnd="@drawable/ic_upload_file"
+            android:onClick="@{()->viewModel.onBrowseButtonClicked()}"
             android:text="@string/browse"
             app:drawableTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_32"
+            android:enabled="@{viewModel.showImage}"
             android:hint="@string/category_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,14 +64,17 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@={viewModel.categoryName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_32"
+            android:onClick="@{()->viewModel.onSubmitButtonClicked()}"
             android:text="@string/submit"
+            android:enabled="@{!viewModel.categoryName.blank &amp;&amp;!viewModel.categoryImagePath.blank}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCategory" />

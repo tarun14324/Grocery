@@ -25,11 +25,16 @@
                 android:id="@+id/itemImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/gray_light"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/apple" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/itemImage"
+                android:id="@+id/divider"
+                android:layout_height="1dp" />
 
             <TextView
                 android:id="@+id/itemTitle"
@@ -41,7 +46,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemImage" />
+                app:layout_constraintTop_toBottomOf="@id/divider" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/itemEdit"
