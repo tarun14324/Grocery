@@ -21,7 +21,8 @@ class CategoryViewModel @Inject constructor(private val userDataBase: UserDataBa
 
     private val _addImageEventChannel = Channel<Unit>(Channel.CONFLATED)
     val addImageEventChannel = _addImageEventChannel.receiveAsFlow()
-
+    private val _toastEventChannel = Channel<String>(Channel.CONFLATED)
+    val toastEventChannel = _toastEventChannel.receiveAsFlow()
 
     var categoryList = MutableStateFlow(listOf<UserEntity>())
 
@@ -30,7 +31,7 @@ class CategoryViewModel @Inject constructor(private val userDataBase: UserDataBa
     }
 
     private fun getData() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             categoryList.value = userDataBase.userDao().getCategory()
         }
     }
@@ -39,7 +40,9 @@ class CategoryViewModel @Inject constructor(private val userDataBase: UserDataBa
     val addDataBaseCreatedChannel = _addDataBaseCreatedChannel.receiveAsFlow()
 
     val showImage = MutableStateFlow(false)
+    val isUpdateCategory = MutableStateFlow(false)
     val categoryName = MutableStateFlow("")
+    val categoryId = MutableStateFlow(0)
     val categoryImagePath = MutableStateFlow("")
 
     fun onCategoryAddButtonClicked() {
@@ -52,14 +55,34 @@ class CategoryViewModel @Inject constructor(private val userDataBase: UserDataBa
 
     fun onSubmitButtonClicked() {
         viewModelScope.launch {
-            userDataBase.userDao().addCategory(
-                UserEntity(
-                    categoryName = categoryName.value,
-                    categoryImagePath = categoryImagePath.value
-                )
-            )
-            _addDataBaseCreatedChannel.trySend(Unit)
+            try {
+                if (isUpdateCategory.value) {
+                    userDataBase.userDao().editCategory(
+                        UserEntity(
+                            id = categoryId.value,
+                            categoryName = categoryName.value,
+                            categoryImagePath = categoryImagePath.value
+                        )
+                    )
+                    _toastEventChannel.trySend("successfully Updated")
+                    _addDataBaseCreatedChannel.trySend(Unit)
+                } else {
+                    userDataBase.userDao().addCategory(
+                        UserEntity(
+                            categoryName = categoryName.value,
+                            categoryImagePath = categoryImagePath.value
+                        )
+                    )
+                    _toastEventChannel.trySend("successfully created")
+                    _addDataBaseCreatedChannel.trySend(Unit)
+                }
+            } catch (e: Exception) {
+                e.localizedMessage?.let { _toastEventChannel.trySend(it) }
+            }
         }
+    }
+    override fun refreshData() {
+       getData()
     }
 
 }

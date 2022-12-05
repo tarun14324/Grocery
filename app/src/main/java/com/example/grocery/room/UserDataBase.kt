@@ -6,13 +6,13 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities = [UserEntity::class],
+    entities = [UserEntity::class,CategoryListItems::class],
     autoMigrations = [
-        AutoMigration (from = 1, to = 2)
+        AutoMigration(from = 1, to = 2)
     ],
-    version = 2,
+    version = 8,
     exportSchema = true
 )
-abstract class  UserDataBase(): RoomDatabase() {
-   abstract fun userDao():RoomDao
+abstract class UserDataBase() : RoomDatabase() {
+    abstract fun userDao(): RoomDao
 }

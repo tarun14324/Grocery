@@ -10,18 +10,18 @@
         android:name="com.example.grocery.category.AddCategoryFragment"
         android:label="AddCategory"
         tools:layout="@layout/fragment_add_category">
-<!--        <argument-->
-<!--            android:name="category details"-->
-<!--            android:defaultValue="@null"-->
-<!--            app:argType="com.example.grocery.room.UserEntity"-->
-<!--            app:nullable="true" />-->
+
+        <argument
+            android:name="category"
+            app:argType="com.example.grocery.model.Category" />
+
     </fragment>
 
     <fragment
         android:id="@+id/createCategoryList"
         android:name="com.example.grocery.category_sub_items.AddCategoryList"
         android:label="CreateCategoryList"
-        tools:layout="@layout/fragment_add_category_list" />
+        tools:layout="@layout/fragment_add_category_list"/>
 
     <fragment
         android:id="@+id/userFragment"
@@ -65,7 +65,7 @@
         android:id="@+id/categorySubItemsFragment"
         android:name="com.example.grocery.category_sub_items.CategorySubItemsFragment"
         android:label="CategorySubItemsFragment"
-        tools:layout="@layout/fragment_category_sub_items">
+        tools:layout="@layout/fragment_category_sub_items" >
         <action
             android:id="@+id/action_categorySubItemsFragment_to_createCategoryList"
             app:destination="@id/createCategoryList" />

@@ -19,7 +19,7 @@
             android:id="@+id/btnAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/category_name"
+            android:text="@string/category"
             android:onClick="@{()->viewmodel.onCategoryButtonClicked()}"
             android:paddingHorizontal="@dimen/margin_32"
             android:layout_marginHorizontal="@dimen/margin_32"

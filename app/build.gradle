@@ -3,7 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
+    id "androidx.navigation.safeargs"
+    id "kotlin-parcelize"
+
+
 }
 
 android {
@@ -93,6 +96,10 @@ dependencies {
     // activity and fragment
     implementation "androidx.activity:activity-ktx:1.6.1"
     implementation "androidx.fragment:fragment-ktx:1.5.4"
+
+    //EasyPermissions is a wrapper library to simplify basic system permissions logic when targeting Android M or higher.
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 
 
 }

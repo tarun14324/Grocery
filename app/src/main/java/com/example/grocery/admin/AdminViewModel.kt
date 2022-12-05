@@ -20,4 +20,8 @@ class AdminViewModel @Inject constructor() : BaseViewModel() {
     fun onCategoryListButtonClicked() {
         _categoryListEventChannel.trySend(Unit)
     }
+
+    override fun refreshData() {
+       // TODO("Not yet implemented")
+    }
 }

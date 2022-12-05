@@ -20,4 +20,8 @@ class HomeViewModel @Inject constructor() : BaseViewModel() {
     fun onUserButtonClicked() {
         _userEventChannel.trySend(Unit)
     }
+
+    override fun refreshData() {
+        // TODO("Not yet implemented")
+    }
 }

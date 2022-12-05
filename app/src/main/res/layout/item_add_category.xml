@@ -28,7 +28,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/apple" />
+                tools:srcCompat="@drawable/apple" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
