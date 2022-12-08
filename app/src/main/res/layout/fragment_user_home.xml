@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.grocery.user_home.UserHomeViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHomeCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_home_all_categories_list" />
+
+
+            <View
+                android:id="@+id/locationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:background="@color/gray_light"
+                app:layout_constraintTop_toBottomOf="@id/rvHomeCategory" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStealDeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/locationLayout"
+                tools:itemCount="2"
+                tools:listitem="@layout/list_steal_deals_products" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAllDeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/rvStealDeals"
+                tools:itemCount="2"
+                tools:listitem="@layout/product_item_grid" />
+
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/tabDots"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginHorizontal="@dimen/dimen_16"-->
+<!--                android:background="@drawable/tab_selector"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/rvAllDeals"-->
+<!--                app:tabBackground="@drawable/tab_selector"-->
+<!--                app:tabGravity="center"-->
+<!--                app:tabIndicatorHeight="0dp" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

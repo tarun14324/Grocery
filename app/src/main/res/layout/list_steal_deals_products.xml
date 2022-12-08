@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.grocery.model.ProductDetails" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/productCardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="1dp"
+        android:background="#ffffff">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productImg"
+            android:layout_width="@dimen/dimen_100"
+            android:layout_height="@dimen/dimen_100"
+            android:src="@drawable/apple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productName"
+            android:layout_width="@dimen/dimen_0"
+            android:layout_height="wrap_content"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@{item.categoryName}"
+            android:textColor="@android:color/background_dark"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/productImg"
+            app:layout_constraintTop_toTopOf="@id/productImg"
+            tool:text="apple" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productShortDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productName"
+            android:layout_marginTop="@dimen/dimen_4"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="@{item.categoryItemDesc}"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintStart_toStartOf="@id/productName"
+            app:layout_constraintTop_toBottomOf="@id/productName"
+            tool:text="kashmir apple" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dimen_10"
+            android:paddingEnd="@dimen/dimen_10"
+            android:singleLine="true"
+            android:text="@{item.categoryItemPrice+``}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/productName"
+            app:layout_constraintTop_toBottomOf="@id/productShortDesc"
+            tool:text="20" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/discountPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@{item.offerPrice+``}"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintStart_toEndOf="@id/productPrice"
+            app:layout_constraintTop_toTopOf="@id/productPrice"
+            tool:text="40" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addButtonLayout"
+            android:layout_width="@dimen/dimen_100"
+            android:layout_height="@dimen/dimen_36"
+            android:background="@drawable/bg_add_remove_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="@dimen/dimen_2"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/decCountButton"
+                isVisible="@{!item.isShowAddLayout}"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/blue"
+                android:src="@drawable/ic_remove"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAdd"
+                isVisible="@{item.isShowAddLayout}"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/add"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuality"
+                isVisible="@{!item.isShowAddLayout}"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{item.quantity+``}"
+                android:textColor="@color/blue"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toEndOf="@id/decCountButton" />
+
+            <View
+                android:layout_width="@dimen/dimen_1"
+                android:layout_height="match_parent"
+                android:background="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/incCountButton"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="match_parent"
+                android:background="@{!item.isShowAddLayout ? @color/blue : @color/transparent,default=@color/transparent}"
+                android:src="@drawable/ic_add"
+                android:tint="@{!item.isShowAddLayout ? @color/white : @color/blue,default=@color/blue}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

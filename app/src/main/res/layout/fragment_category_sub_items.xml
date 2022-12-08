@@ -16,7 +16,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddCategory"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_16"
@@ -33,7 +33,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcategory"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dimen_0"
             android:orientation="vertical"
             android:paddingBottom="?attr/actionBarSize"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

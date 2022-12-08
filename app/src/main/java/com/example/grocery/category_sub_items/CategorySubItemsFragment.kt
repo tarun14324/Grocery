@@ -1,7 +1,6 @@
 package com.example.grocery.category_sub_items
 
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope

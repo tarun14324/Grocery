@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.grocery.room.UserEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/margin_4"
+        android:layout_marginEnd="@dimen/margin_8">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivCategory"
+            android:layout_width="@dimen/dimen_70"
+            android:layout_height="@dimen/dimen_70"
+            android:background="@drawable/all_circle_white_bg"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_8"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:text="@{item.categoryName}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/ivCategory"
+            app:layout_constraintStart_toStartOf="@id/ivCategory"
+            app:layout_constraintTop_toBottomOf="@id/ivCategory"
+            tool:text="oil&amp;ghee" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

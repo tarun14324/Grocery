@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.grocery.user.UserViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:fillViewport="true">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/flipkartTvButton"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:backgroundTint="@color/blue"
+                    android:text="@string/flipkart"
+                    app:icon="@drawable/flipkart_logo"
+                    app:iconGravity="textStart"
+                    app:iconSize="@dimen/margin_24"
+                    app:iconTint="@null"
+                    app:layout_constraintEnd_toStartOf="@id/groceryTvButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/groceryTvButton"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:backgroundTint="@color/transparent"
+                    android:text="@string/grocery"
+                    android:textColor="@color/black"
+                    app:icon="@drawable/grocery"
+                    app:iconGravity="textStart"
+                    app:iconSize="@dimen/margin_24"
+                    app:iconTint="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/flipkartTvButton"
+                    app:layout_constraintTop_toTopOf="@id/flipkartTvButton" />
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginVertical="@dimen/margin_4"
+                    android:background="@drawable/rounded_corner"
+                    app:defaultQueryHint="@string/search"
+                    app:layout_constraintTop_toBottomOf="@id/flipkartTvButton"
+                    app:searchHintIcon="@drawable/ic_search_black" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:textSize="@dimen/text_size_6"
+                    app:layout_constraintTop_toBottomOf="@id/search_bar"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorGravity="bottom"
+                    app:tabMode="auto"
+                    app:tabTextColor="@color/black">
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="@dimen/dimen_0"
+                    android:layout_height="@dimen/dimen_0"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,18 +1,22 @@
 package com.example.grocery.util
 
+import android.R
+import android.app.Activity
 import android.graphics.Paint
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.textfield.TextInputLayout
+
 
 fun <T : ViewDataBinding> ViewGroup.inflate(
     @LayoutRes layoutRes: Int,
@@ -42,12 +46,29 @@ fun setErrorText(view: TextInputLayout, errorMessage: String) {
     else
         view.error = errorMessage;
 }
-
-
-class TextFieldValidation(private val view: View) : TextWatcher {
-    override fun afterTextChanged(s: Editable?) {}
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-    }
-
+@BindingAdapter("layoutMarginTop")
+fun setLayoutMarginTop(view: View, dimen: Float) {
+    val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+    layoutParams.topMargin = dimen.toInt()
+    view.layoutParams = layoutParams
 }
+
+@BindingAdapter("layoutMarginBottom")
+fun setLayoutMarginBottom(view: View, dimen: Float) {
+    val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+    layoutParams.bottomMargin = dimen.toInt()
+    view.layoutParams = layoutParams
+}
+@BindingAdapter("layoutMarginStart")
+fun setLayoutMarginStart(view: View, dimen: Float) {
+    val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+    layoutParams.marginStart = dimen.toInt()
+    view.layoutParams = layoutParams
+}
+@BindingAdapter("layoutMarginEnd")
+fun setLayoutMarginEnd(view: View, dimen: Float) {
+    val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+    layoutParams.marginEnd = dimen.toInt()
+    view.layoutParams = layoutParams
+}
+

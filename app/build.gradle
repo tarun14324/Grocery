@@ -97,8 +97,8 @@ dependencies {
     implementation "androidx.activity:activity-ktx:1.6.1"
     implementation "androidx.fragment:fragment-ktx:1.5.4"
 
-    //EasyPermissions is a wrapper library to simplify basic system permissions logic when targeting Android M or higher.
     implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
 
 

@@ -1,7 +1,6 @@
 package com.example.grocery.category
 
 
-import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
