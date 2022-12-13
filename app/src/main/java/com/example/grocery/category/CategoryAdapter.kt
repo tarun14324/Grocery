@@ -32,15 +32,6 @@ class CategoryAdapter(
 
         override fun onBind(item: UserEntity) {
             binding.item = item
-            try {
-                Glide.with(binding.itemImage.context)
-                    .load(item.categoryImagePath)
-                    .error(R.drawable.ic_person)
-                    .into(binding.itemImage)
-            } catch (_: java.lang.Exception) {
-
-            }
-
         }
     }
 }

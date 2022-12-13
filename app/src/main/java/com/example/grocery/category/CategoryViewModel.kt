@@ -81,8 +81,9 @@ class CategoryViewModel @Inject constructor(private val userDataBase: UserDataBa
             }
         }
     }
+
     override fun refreshData() {
-       getData()
+        getData()
     }
 
 }

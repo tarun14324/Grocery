@@ -21,4 +21,8 @@ interface RoomDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCategoryList(category: CategoryListItems)
 
+
+    @Query("SELECT * FROM categorylistitems WHERE category_deal_type==:categoryDealType")
+    suspend fun findCategoryDeals(categoryDealType:String):List<CategoryListItems>
+
 }

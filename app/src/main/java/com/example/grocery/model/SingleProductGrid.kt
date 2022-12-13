@@ -8,7 +8,7 @@ data class SingleProductGrid(
     val discount: Int,
     var quantity: Int = 0,
     val maxAllowedQuantity: Int = 10,
-){
+) {
     val offerPrice: Int get() = productPrice - discount
 
     val isShowAddLayout: Boolean get() = (quantity == 0)

@@ -143,6 +143,30 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropdownMenuType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_32"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:hint="@string/category"
+                app:errorEnabled="@{viewModel.selectCategoryNameErrorEnabled}"
+                app:errorText="@{viewModel.selectCategoryNameError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tildesc">
+
+                <AutoCompleteTextView
+                    android:id="@+id/categoryTypeAutoCompleteTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/category_deals"
+                    android:inputType="none"
+                    android:text="@={viewModel.selectCategoryName}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivCategory"
                 isVisible="@{viewModel.showImage,default=false}"
@@ -154,7 +178,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tildesc"
+                app:layout_constraintTop_toBottomOf="@id/dropdownMenuType"
                 tools:srcCompat="@drawable/apple" />
 
             <com.google.android.material.button.MaterialButton
@@ -170,7 +194,7 @@
                 app:drawableTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tildesc" />
+                app:layout_constraintTop_toBottomOf="@id/dropdownMenuType" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier"

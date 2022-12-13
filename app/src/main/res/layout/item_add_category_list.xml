@@ -26,9 +26,10 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitCenter"
+                app:image_url="@{item.categoryImagePath}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/apple" />
+                app:srcCompat="@drawable/potato" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_10"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:text="@{item.categoryName}"
+                android:text="@{`Name :`+item.categoryName}"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@id/itemImage"
@@ -49,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10"
                 android:ellipsize="end"
-                android:text="@{item.categoryItemDesc}"
+                android:text="@{`Desc :`+item.categoryItemDesc}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/product_name"
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_8"
                 android:inputType="number"
-                android:text="@{item.categoryItemWeight}"
+                android:text="@{item.categoryItemWeight+``}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:text="@{item.categoryItemPrice+``}"
+                android:text="@{`MRP `+item.categoryItemPrice+``}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/product_name"
@@ -95,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
-                android:text="@{item.offerPrice+``}"
+                android:text="@{`off `+item.offerPrice+``}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"

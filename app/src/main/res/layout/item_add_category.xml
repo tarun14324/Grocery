@@ -26,9 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="fitCenter"
+                app:image_url="@{item.categoryImagePath}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/apple" />
+                tools:srcCompat="@drawable/potato" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"

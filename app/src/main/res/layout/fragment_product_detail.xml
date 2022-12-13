@@ -1,303 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <data>
+
+        <variable
+            name="details"
+            type="com.example.grocery.room.CategoryListItems" />
+
+        <variable
+            name="viewModel"
+            type="com.example.grocery.details.ProductDetailViewModel" />
+
+        <variable
+            name="showAddLayout"
+            type="boolean" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/product_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:visibility="visible">
+        android:fillViewport="true">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
 
-            <LinearLayout
-
-                android:id="@+id/name"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@id/productName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#fff"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:text="@{details.categoryName}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-                <TextView
-                    android:id="@+id/product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="false"
-                    android:text="@string/app_name"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/product_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:singleLine="false"
-                    android:text="Product Description Here"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/productimage"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/productDesc"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:elevation="4dp"
-                android:visibility="visible">
+                android:layout_marginTop="2dp"
+                android:text="@{details.categoryItemDesc}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintStart_toStartOf="@id/productName"
+                app:layout_constraintTop_toBottomOf="@id/productName" />
 
 
-                <ImageView
-                    android:id="@+id/product_img"
-                    android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productImg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_450"
+                android:src="@drawable/apple"
+                app:image_url="@{details.categoryImagePath}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productDesc" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="M.R.P: "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productImg" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/priceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_8"
+                android:text="@{details.offerPrice+``}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintStart_toEndOf="@id/tvPrice"
+                app:layout_constraintTop_toTopOf="@id/tvPrice" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="@string/quantity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintStart_toStartOf="@id/tvPrice"
+                app:layout_constraintTop_toBottomOf="@id/tvPrice" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addButtonLayout"
+                android:layout_width="@dimen/dimen_100"
+                android:layout_height="@dimen/dimen_36"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:background="@drawable/bg_add_remove_button"
+                android:onClick="@{()->viewModel.onAddLayoutClicked()}"
+                app:layout_constraintBottom_toBottomOf="@id/tvQuantity"
+                app:layout_constraintStart_toEndOf="@id/tvQuantity"
+                app:layout_constraintTop_toTopOf="@id/tvQuantity">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="@dimen/dimen_2"
                     android:layout_height="match_parent"
-                    android:src="@drawable/apple" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.7" />
 
 
-            </FrameLayout>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/decCountButton"
+                    isVisible="@{!showAddLayout}"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue"
+                    android:src="@drawable/ic_remove"
+                    android:tint="@color/white"
+                    android:onClick="@{()->viewModel.onRemoveClicked()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-            <LinearLayout
-                android:id="@+id/rating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/productimage"
-                android:background="#fff"
-                android:orientation="vertical"
-                android:paddingLeft="16dp"
-                android:visibility="visible">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="M.R.P: "
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/mrp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="Rs 290 /-"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="Price: "
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="Rs 250 /-"
-                        android:textColor="@color/gray_light"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="You Save: "
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/saved"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="Rs 50"
-                        android:textColor="@color/gray_light"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/saved_per"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="(8%)"
-                        android:textColor="@color/gray_light"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rating"
-                android:background="#fff"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:text="Quantity"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/qut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/add"
-                        android:layout_width="31dp"
-                        android:layout_height="31dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_add" />
-
-                    <TextView
-                        android:id="@+id/product_qty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="2dp"
-                        android:background="#00000000"
-                        android:hint="1"
-                        android:inputType="number"
-                        android:maxLength="2"
-                        android:text="1"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:id="@+id/remove"
-                        android:layout_width="31dp"
-                        android:layout_height="31dp"
-                        android:layout_marginLeft="22dp"
-                        android:padding="2dp"
-                        android:src="@drawable/ic_person" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <!--******add to cart******-->
-
-
-            <LinearLayout
-                android:id="@+id/save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/size"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/buynow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:elevation="3dp"
-                    android:background="@drawable/rounded_corner"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAdd"
+                    isVisible="@{showAddLayout}"
+                    android:layout_width="@dimen/dimen_0"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="90dp"
-                    android:paddingRight="90dp"
-                    android:paddingTop="12dp"
-                    android:text="BUY NOW"
-                    android:textColor="@color/black" />
+                    android:text="@string/add"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/addtocart"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_corner"
-                    android:elevation="3dp"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvQuality"
+                    isVisible="@{!showAddLayout}"
+                    android:layout_width="@dimen/dimen_0"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingBottom="12dp"
-                    android:paddingLeft="90dp"
-                    android:paddingRight="90dp"
-                    android:paddingTop="12dp"
-                    android:text="ADD TO CART"
-                    android:textColor="@color/black" />
+                    android:text="@{viewModel.itemQuantity+``}"
+                    android:textColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toEndOf="@id/decCountButton" />
+
+                <View
+                    android:layout_width="@dimen/dimen_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/incCountButton"
+                    android:layout_width="@dimen/dimen_0"
+                    android:layout_height="match_parent"
+                    android:background="@{!showAddLayout ? @color/blue : @color/transparent,default=@color/transparent}"
+                    android:src="@drawable/ic_add"
+                    android:onClick="@{()->viewModel.onAddClicked()}"
+                    android:tint="@{!showAddLayout ? @color/white : @color/blue,default=@color/blue}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buyNow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_16"
+                android:background="@drawable/rounded_corner"
+                android:text="@string/buy_now"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addToCart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvQuantity" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addToCart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_8"
+                android:background="@drawable/rounded_corner"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/buyNow" />
 
-        </RelativeLayout>
-    </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="220dp"
-        android:visibility="gone" />
-
-
-</RelativeLayout>
+</layout>

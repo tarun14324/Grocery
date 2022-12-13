@@ -36,14 +36,6 @@ class CategorySubItemsListAdapter(
 
         override fun onBind(item: CategoryListItems) {
             binding.item = item
-            try {
-            Glide.with(context)
-                .load(item.categoryImagePath)
-                .error(R.drawable.ic_person)
-                .into(binding.itemImage)
-        }catch (_:Exception){
-
-        }
         }
     }
 

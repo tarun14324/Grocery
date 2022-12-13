@@ -30,53 +30,171 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_home_all_categories_list" />
 
+            <View
+                android:id="@+id/dividerCategory"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvHomeCategory" />
+
 
             <View
                 android:id="@+id/locationLayout"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
                 android:background="@color/gray_light"
-                app:layout_constraintTop_toBottomOf="@id/rvHomeCategory" />
+                app:layout_constraintTop_toBottomOf="@id/dividerCategory" />
+
+            <View
+                android:id="@+id/dividerLocationLayout"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/locationLayout" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvStealDeals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_16"
                 android:layout_marginTop="@dimen/dimen_10"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/locationLayout"
+                app:layout_constraintTop_toBottomOf="@id/dividerLocationLayout"
                 tools:itemCount="2"
                 tools:listitem="@layout/list_steal_deals_products" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAllDeals"
+            <include
+                android:id="@+id/layoutFrequentlyBought"
+                layout="@layout/layout_frequnetly_bought"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dimen_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvStealDeals" />
+
+            <View
+                android:id="@+id/dividerFrequentlyBought"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutFrequentlyBought" />
+
+            <include
+                android:id="@+id/includeLayout1"
+                backGroundColor="@color/blue"
+                header="Saving Licence Activated"
+                layout="@layout/layout_product_grid_items"
+                subTitle="@string/add"
+                title="Cooking Essential Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerFrequentlyBought" />
+
+
+            <View
+                android:id="@+id/dividerIncludeLayout1"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/includeLayout1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrendingStores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/rvStealDeals"
+                app:layout_constraintTop_toBottomOf="@id/dividerIncludeLayout1"
                 tools:itemCount="2"
-                tools:listitem="@layout/product_item_grid" />
+                tools:listitem="@layout/item_card_banners" />
 
-<!--            <com.google.android.material.tabs.TabLayout-->
-<!--                android:id="@+id/tabDots"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:layout_marginHorizontal="@dimen/dimen_16"-->
-<!--                android:background="@drawable/tab_selector"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/rvAllDeals"-->
-<!--                app:tabBackground="@drawable/tab_selector"-->
-<!--                app:tabGravity="center"-->
-<!--                app:tabIndicatorHeight="0dp" />-->
+            <View
+                android:id="@+id/dividerTrendingStores"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvTrendingStores" />
+
+
+            <include
+                android:id="@+id/layoutAllCategories"
+                layout="@layout/layout_all_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintTop_toBottomOf="@id/dividerTrendingStores" />
+
+            <View
+                android:id="@+id/dividerLayoutAllCategories"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutAllCategories" />
+
+
+            <include
+                android:id="@+id/includeLayout2"
+                backGroundColor="@color/blue"
+                header="Saving Licence Activated"
+                layout="@layout/layout_product_grid_items"
+                subTitle="@string/add"
+                title="Cooking Essential Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerLayoutAllCategories" />
+
+            <View
+                android:id="@+id/dividerIncludeLayout2"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/includeLayout2" />
+
+
+            <include
+                android:id="@+id/includeLayout3"
+                backGroundColor="@color/blue"
+                header="Saving Licence Activated"
+                layout="@layout/layout_product_grid_items"
+                subTitle="@string/add"
+                title="Cooking Essential Corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerIncludeLayout2" />
+
+            <View
+                android:id="@+id/dividerIncludeLayout3"
+                style="@style/Divider"
+                android:layout_marginTop="@dimen/margin_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/includeLayout3" />
+
+            <include
+                android:id="@+id/layoutSponsored"
+                layout="@layout/layout_sponsored"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="?actionBarSize"
+                app:layout_constraintTop_toBottomOf="@id/dividerIncludeLayout3" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

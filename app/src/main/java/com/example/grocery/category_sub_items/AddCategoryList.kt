@@ -39,10 +39,20 @@ class AddCategoryList : BaseFragment<FragmentAddCategoryListBinding>() {
             )
         }
 
+    private val categoryDealsTypeArrayAdapter: ArrayAdapter<String>
+        get() {
+            return ArrayAdapter(
+                requireContext(),
+                R.layout.dropdown_item,
+                viewModel.categoryDealsTypeList
+            )
+        }
+
     override fun setUp() {
         binding.viewModel = viewModel
         val adapter = arrayAdapter
         binding.autoCompleteTextView.setAdapter(adapter)
+        binding.categoryTypeAutoCompleteTv.setAdapter(categoryDealsTypeArrayAdapter)
     }
 
     override fun getData(viewLifecycleOwner: LifecycleOwner) {

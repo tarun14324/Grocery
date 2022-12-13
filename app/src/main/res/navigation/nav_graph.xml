@@ -21,13 +21,17 @@
         android:id="@+id/createCategoryList"
         android:name="com.example.grocery.category_sub_items.AddCategoryList"
         android:label="CreateCategoryList"
-        tools:layout="@layout/fragment_add_category_list"/>
+        tools:layout="@layout/fragment_add_category_list" />
 
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.grocery.user.UserFragment"
         android:label="UserFragment"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user">
+        <action
+            android:id="@+id/action_userFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.grocery.home.HomeFragment"
@@ -65,9 +69,17 @@
         android:id="@+id/categorySubItemsFragment"
         android:name="com.example.grocery.category_sub_items.CategorySubItemsFragment"
         android:label="CategorySubItemsFragment"
-        tools:layout="@layout/fragment_category_sub_items" >
+        tools:layout="@layout/fragment_category_sub_items">
         <action
             android:id="@+id/action_categorySubItemsFragment_to_createCategoryList"
             app:destination="@id/createCategoryList" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.grocery.details.ProductDetailFragment"
+        android:label="ProductDetailFragment">
+        <argument
+            android:name="category"
+            app:argType="com.example.grocery.room.CategoryListItems" />
     </fragment>
 </navigation>

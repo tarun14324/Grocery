@@ -3,16 +3,14 @@ package com.example.grocery.user_home
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import com.example.grocery.R
 import com.example.grocery.base.BaseFragment
 import com.example.grocery.databinding.FragmentUserHomeBinding
-import com.example.grocery.model.ProductDetails
-import com.example.grocery.model.SingleProductGrid
+import com.example.grocery.room.CategoryListItems
 import com.example.grocery.room.UserEntity
-import com.example.grocery.user_home.adapters.AllCategoriesAdapter
-import com.example.grocery.user_home.adapters.DealsAdapter
-import com.example.grocery.user_home.adapters.StealDealsAdapter
+import com.example.grocery.user.UserFragmentDirections
+import com.example.grocery.user_home.adapters.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -27,13 +25,46 @@ class UserHomeFragment : BaseFragment<FragmentUserHomeBinding>() {
         onItemClicked(it)
     }
     private val stealDealsAdapter = StealDealsAdapter(onItemCLicked = {
-        //on item clicked
+        onProductClicked(it)
     })
-    private val dealsAdapter = DealsAdapter(onItemCLicked = {
+    private val bestSellerListAdapter = StealDealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
+    private val groomingListAdapter = StealDealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
+    private val cookingListAdapter = StealDealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
+    private val foodListAdapter = StealDealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
+    private val frequntlyBoughtListAdapter = DealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
+    private val fruitsListAdapter = StealDealsAdapter(onItemCLicked = {
+        onProductClicked(it)
+    })
 
+    private val dealsAdapter = DealsAdapter(onItemCLicked = {
+        onProductClicked(it)
     })
 
     private fun onItemClicked(it: UserEntity) {
+
+    }
+
+    private fun onProductClicked(it: CategoryListItems) {
+        val action = UserFragmentDirections.actionUserFragmentToProductDetailFragment(it)
+        findNavController().navigate(action)
+
+    }
+
+    private val trendingStoresAdapter = ImageAdapter {
+
+    }
+
+    private val sponsoredAdapter = SponsoredAdapter {
 
     }
 
@@ -43,72 +74,63 @@ class UserHomeFragment : BaseFragment<FragmentUserHomeBinding>() {
                 adapter.submitList(it)
             }
         }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.categorySubItems.collectLatest {
+                bestSellerListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.categorySubItems.collectLatest {
+                stealDealsAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.bestSellerList.collectLatest {
+                bestSellerListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.groomingList.collectLatest {
+                groomingListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.fruitsList.collectLatest {
+                fruitsListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.frequntlyBoughtList.collectLatest {
+                frequntlyBoughtListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.cookingList.collectLatest {
+                cookingListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.foodList.collectLatest {
+                foodListAdapter.submitList(it)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.SponsoredList.collectLatest {
+                sponsoredAdapter.submitList(it)
+            }
+        }
     }
 
     override fun setUp() {
         binding.viewModel = viewModel
         binding.rvHomeCategory.adapter = adapter
         binding.rvStealDeals.adapter = stealDealsAdapter
-        binding.rvAllDeals.adapter = dealsAdapter
-        binding.rvHomeCategory.itemAnimator = null
-        binding.rvStealDeals.itemAnimator = null
-        binding.rvAllDeals.itemAnimator = null
-        initializeData()
+        binding.layoutAllCategories.rvCategory.adapter = adapter
+        binding.rvTrendingStores.adapter = trendingStoresAdapter
+        binding.includeLayout1.rvAllDeals.adapter = stealDealsAdapter
+        binding.includeLayout2.rvAllDeals.adapter = cookingListAdapter
+        binding.includeLayout3.rvAllDeals.adapter = cookingListAdapter
+        binding.layoutSponsored.rvSponsored.adapter = sponsoredAdapter
+        binding.layoutFrequentlyBought.rvfrequentlyBoughtDeals.adapter = frequntlyBoughtListAdapter
     }
-
-    private fun initializeData() {
-        val steallist = listOf(
-            ProductDetails(
-                0,
-                "atta",
-                "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=",
-                200,
-                categoryItemWeight = "1kg",
-                "",
-                ""
-            ),
-            ProductDetails(
-                id = 0,
-                categoryName = "atta2",
-                categoryImagePath = "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=",
-                categoryItemPrice = 40,
-                categoryItemWeight = "100g",
-                categoryItemDesc = "well statute-rated",
-                categoryItemName = "chakra"
-            )
-        )
-        stealDealsAdapter.submitList(steallist)
-        val dealsList = listOf(
-            SingleProductGrid(
-                "atta 1", "chakra", "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=", 100, 20, 0
-            ),
-            SingleProductGrid(
-                "att2",
-                "malabar",
-                "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=",
-                30,
-                10,
-                0
-            ),
-            SingleProductGrid(
-                "att3",
-                "malabar",
-                "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=",
-                60,
-                30,
-                0
-            ),
-            SingleProductGrid(
-                "att4",
-                "malabar",
-                "https://media.istockphoto.com/id/164981421/photo/large-group-of-food-shoot-on-white-backdrop.jpg?s=612x612&w=0&k=20&c=S3UjegrKBG-HyZdYQmOeBCk1Cfk7C7XZrUGb0n56Gy8=",
-                80,
-                15,
-                0
-            ),
-        )
-        dealsAdapter.submitList(dealsList)
-    }
-
-
 }

@@ -36,16 +36,6 @@ class AllCategoriesAdapter(
 
         override fun onBind(item: UserEntity) {
             binding.item = item
-            try {
-                Glide.with(binding.ivCategory.context)
-                    .load(item.categoryImagePath)
-                    .centerCrop()
-                    .error(R.drawable.flipkart_logo)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(binding.ivCategory)
-            } catch (_: Exception) {
-
-            }
         }
     }
 

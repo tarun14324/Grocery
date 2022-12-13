@@ -47,7 +47,21 @@ class CategoryListViewModel @Inject constructor(private val dataBase: UserDataBa
     val categoryitemDescError = MutableStateFlow("")
     val categoryitemDescErrorEnabled = MutableStateFlow(false)
 
+    val selectCategoryName = MutableStateFlow("")
+    val selectCategoryNameError = MutableStateFlow("")
+    val selectCategoryNameErrorEnabled = MutableStateFlow(false)
+
     var categoryList = MutableStateFlow(listOf<String>())
+
+    val categoryDealsTypeList = listOf(
+        "BEST_SELLER_SQUAD",
+        "FOOD_DRINKS",
+        "COOKING_ESSENTIAL_CORNER",
+        "FRUITS_VEGGIES",
+        "FREQUENTLY_BOUGHT",
+        "GROOMING_ESSENTIAL",
+        "SPONSORED_ITEMS"
+    )
     var categorySubItems = MutableStateFlow(listOf<CategoryListItems>())
 
     init {
@@ -82,7 +96,8 @@ class CategoryListViewModel @Inject constructor(private val dataBase: UserDataBa
                         categoryImagePath = categoryImagePath.value,
                         categoryItemDesc = categoryitemDesc.value,
                         categoryItemPrice = categoryitemPrice.value.toInt(),
-                        categoryItemWeight = categoryitemWeight.value,
+                        categoryItemWeight = categoryitemWeight.value.toInt(),
+                        categoryDealType = selectCategoryName.value
                     )
                 )
                 _toastEventChannel.trySend("successfully created")
@@ -118,6 +133,10 @@ class CategoryListViewModel @Inject constructor(private val dataBase: UserDataBa
         if (categoryImagePath.value.isEmpty()) {
             categoryImagePathError.value = "Image Field Required!"
             categoryImagePathErrorEnabled.value = true
+        }
+        if (selectCategoryName.value.isEmpty()) {
+            selectCategoryNameError.value = "Category Sub Type Field Required!"
+            selectCategoryNameErrorEnabled.value = true
         } else {
             categoryNameErrorEnabled.value = false
             categoryitemNameErrorEnabled.value = false
@@ -136,4 +155,6 @@ class CategoryListViewModel @Inject constructor(private val dataBase: UserDataBa
     override fun refreshData() {
         getData()
     }
+
+
 }

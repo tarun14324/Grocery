@@ -1,7 +1,5 @@
 package com.example.grocery.util
 
-import android.R
-import android.app.Activity
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.grocery.R
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -46,6 +44,7 @@ fun setErrorText(view: TextInputLayout, errorMessage: String) {
     else
         view.error = errorMessage;
 }
+
 @BindingAdapter("layoutMarginTop")
 fun setLayoutMarginTop(view: View, dimen: Float) {
     val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
@@ -59,16 +58,32 @@ fun setLayoutMarginBottom(view: View, dimen: Float) {
     layoutParams.bottomMargin = dimen.toInt()
     view.layoutParams = layoutParams
 }
+
 @BindingAdapter("layoutMarginStart")
 fun setLayoutMarginStart(view: View, dimen: Float) {
     val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
     layoutParams.marginStart = dimen.toInt()
     view.layoutParams = layoutParams
 }
+
 @BindingAdapter("layoutMarginEnd")
 fun setLayoutMarginEnd(view: View, dimen: Float) {
     val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
     layoutParams.marginEnd = dimen.toInt()
     view.layoutParams = layoutParams
+}
+
+
+@BindingAdapter("app:image_url")
+fun loadImage(view: ImageView, logoUrl: String?) {
+    if (logoUrl == null) {
+        view.setImageResource(R.drawable.potato)
+    } else {
+        Glide.with(view.context).load(logoUrl).centerCrop()
+            .centerCrop()
+            .placeholder(R.drawable.potato)
+            .error(R.drawable.potato)
+            .into(view)
+    }
 }
 
